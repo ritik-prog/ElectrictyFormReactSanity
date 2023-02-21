@@ -23,18 +23,24 @@ function AdminDashboard({ setToggle }) {
         setLoading(true)
         const confirmDelete = window.confirm('Are you sure you want to delete this record?');
         if (confirmDelete) {
-            await client.delete(id);
-            setElectricityData(electricityData.filter((data) => data._id !== id));
-            toast.success(`Record with ID ${id} deleted successfully`, {
-                position: "bottom-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
+            try {
+
+
+                await client.delete(id);
+                setElectricityData(electricityData.filter((data) => data._id !== id));
+                toast.success(`Record with ID ${id} deleted successfully`, {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            } catch (ex) {
+                console.log(ex)
+            }
             setLoading(false)
         } else {
             setLoading(false)
@@ -87,66 +93,6 @@ function AdminDashboard({ setToggle }) {
         updatedRecord.adharNumber = prompt(
             `Enter updated Aadhaar number (currently ${recordToUpdate.adharNumber}):`
         ) || recordToUpdate.adharNumber;
-
-        const isValidPhoneNumber = validatePhoneNumber(updatedRecord.phoneNumber);
-        const isValidAdharNumber = validateAdharNumber(updatedRecord.adharNumber);
-        const isValidDate = validateDate(updatedRecord.date);
-
-        if (!isValidPhoneNumber) {
-            toast.error('Please enter a valid phone number', {
-                position: "bottom-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-            });
-            return;
-        }
-
-        if (!isValidAdharNumber) {
-            toast.error('Please enter a valid Aadhaar number', {
-                position: "bottom-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-            });
-            return;
-        }
-
-        if (!isValidDate) {
-            toast.error('Please select today date or future date', {
-                position: "bottom-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-            });
-            return;
-        }
-
-        if (!validateTextString(updatedRecord.ownerName)) {
-            toast.error('Meter Owner Name must contain only letters.', {
-                position: "bottom-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-            });
-            return;
-        }
 
         client
             .patch(id)

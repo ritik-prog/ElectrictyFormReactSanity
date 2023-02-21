@@ -5,14 +5,7 @@ import AdminDashboard from './components/AdminDashboard';
 import { GridLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
 import { validateAdharNumber, validateDate, validateNumberString, validatePhoneNumber, validateTextString } from './validation';
-
-const client = createClient({
-  apiVersion: '2023-01-12',
-  projectId: '50t8sv5b',
-  dataset: 'production',
-  token: 'sk9wDabGTPz07DqbSTlbzMQrWkkbNVJowBjVnsyPJZLROXEdTzVEuVLiENpey0HhcKFZjSaxjOfQQBG5CQvTG1LGQWCtNVVcQ6ybFfxH8GsM4iprwfN585IUlKhof4mkk23S26tzyi9aSPHluryAAneh3U8CIPmGCrnYkeKHdbMXCy1K5gNi',
-  useCdn: false,
-});
+import { client } from './utils/sanity';
 
 const App = () => {
   const [formData, setFormData] = useState({

@@ -78,3 +78,25 @@ input[type="time"] {
 .submit-btn:hover {
   background-color: #357f37;
 }
+
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .container {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  input[type="text"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="time"] {
+    font-size: 14px;
+  }
+}

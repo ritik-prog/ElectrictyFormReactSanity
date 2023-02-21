@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { createClient } from '@sanity/client';
+import { client } from '../utils/sanity'
 import './AdminDashboard.css';
 import { GridLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
-
-const client = createClient({
-    apiVersion: '2023-01-12',
-    projectId: '50t8sv5b',
-    dataset: 'production',
-    token: 'sk9wDabGTPz07DqbSTlbzMQrWkkbNVJowBjVnsyPJZLROXEdTzVEuVLiENpey0HhcKFZjSaxjOfQQBG5CQvTG1LGQWCtNVVcQ6ybFfxH8GsM4iprwfN585IUlKhof4mkk23S26tzyi9aSPHluryAAneh3U8CIPmGCrnYkeKHdbMXCy1K5gNi',
-    useCdn: false,
-});
 
 function AdminDashboard({ setToggle }) {
     const [electricityData, setElectricityData] = useState([]);
